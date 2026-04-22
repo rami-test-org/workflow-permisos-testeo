@@ -31,5 +31,5 @@ jobs:
           PERMISSION: ${{ github.event.inputs.permission }}
           REPOS: ${{ github.event.inputs.repos }}
         run: |
-          chmod +x script.sh
+          chmod +x script-cicd.sh
           ./script.sh

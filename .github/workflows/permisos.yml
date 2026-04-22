@@ -32,4 +32,4 @@ jobs:
           REPOS: ${{ github.event.inputs.repos }}
         run: |
           chmod +x script-cicd.sh
-          ./script.sh
+          ./script-cicd.sh

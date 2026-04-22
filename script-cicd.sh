@@ -31,7 +31,7 @@ fi
 # Validar que el TEAM exista
 team_check=$(curl -s -o /dev/null -w "%{http_code}" \
   -H "Authorization: Bearer $GITHUB_TOKEN" \
-  "https://api.github.com/orgs/GaliciaSeguros/teams/$TEAM")
+  "https://api.github.com/orgs/rami-test-org/teams/$TEAM")
 
 [ "$team_check" -eq 200 ] || { echo "❌ Team no existe o sin acceso (HTTP $team_check)"; exit 1; }
 
@@ -48,14 +48,14 @@ for repo in "${REPO_LIST[@]}"; do
   # Verificar repo
   code_repo=$(curl -s -o /dev/null -w "%{http_code}" \
     -H "Authorization: Bearer $GITHUB_TOKEN" \
-    "https://api.github.com/repos/GaliciaSeguros/$repo")
+    "https://api.github.com/repos/rami-test-org/$repo")
 
   [ "$code_repo" -eq 200 ] || { echo "❌ Repo inválido o sin acceso: $repo (HTTP $code_repo)"; exit 1; }
 
   # Verificar relación team-repo
   response=$(curl -s \
     -H "Authorization: Bearer $GITHUB_TOKEN" \
-    "https://api.github.com/orgs/GaliciaSeguros/teams/$TEAM/repos/GaliciaSeguros/$repo")
+    "https://api.github.com/orgs/rami-test-org/teams/$TEAM/repos/rami-test-org/$repo")
 
   status=$(echo "$response" | jq -r '.message // empty')
 
@@ -78,7 +78,7 @@ for repo in "${REPO_LIST[@]}"; do
   code_apply=$(curl -s -o /dev/null -w "%{http_code}" -X PUT \
     -H "Authorization: Bearer $GITHUB_TOKEN" \
     -H "Accept: application/vnd.github+json" \
-    "https://api.github.com/orgs/GaliciaSeguros/teams/$TEAM/repos/GaliciaSeguros/$repo" \
+    "https://api.github.com/orgs/rami-test-org/teams/$TEAM/repos/rami-test-org/$repo" \
     -d "{\"permission\":\"$PERMISSION\"}")
 
   if [ "$code_apply" -eq 204 ]; then

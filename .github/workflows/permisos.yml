@@ -1,0 +1,35 @@
+name: Gestionar permisos
+
+on:
+  workflow_dispatch:
+    inputs:
+      team:
+        description: "Team"
+        required: true
+      permission:
+        description: "Permiso (pull/push/admin)"
+        required: true
+      repos:
+        description: "Repos (coma separados)"
+        required: true
+
+jobs:
+  permisos:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Instalar jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Ejecutar script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          TEAM: ${{ github.event.inputs.team }}
+          PERMISSION: ${{ github.event.inputs.permission }}
+          REPOS: ${{ github.event.inputs.repos }}
+        run: |
+          chmod +x script.sh
+          ./script.sh

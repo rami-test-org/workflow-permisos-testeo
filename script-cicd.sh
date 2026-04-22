@@ -63,7 +63,7 @@ for repo in "${REPO_LIST[@]}"; do
     echo "ℹ️ El team no está asociado al repo → se creará relación"
     current_permission="None"
   else
-    current_permission=$(echo "$response" | jq -r '.permissions | to_entries[] | select(.value==true) | .key')
+    current_permission=$(echo "$response" | jq -r '.role_name // empty')
     echo "Permiso actual: $current_permission"
   fi
 

@@ -21,7 +21,7 @@ echo "Repos: $REPOS"
 echo "-----------------------------------"
 
 # Teams con permiso para usar ADMIN
-SPECIAL_TEAMS=("cybersec-team" "security-team") # ajustar luego
+SPECIAL_TEAMS=("cybersec-team" "security-team", "test-team") # ajustar luego
 
 if [[ "$PERMISSION" == "admin" ]]; then
   if [[ ! " ${SPECIAL_TEAMS[@]} " =~ " ${TEAM} " ]]; then

@@ -17,6 +17,9 @@ jobs:
   permisos:
     runs-on: ubuntu-latest
 
+    environment:
+        name: production # ESTO HACE QUE SE REQUIERA APROBACION DE UN ADMIN
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4

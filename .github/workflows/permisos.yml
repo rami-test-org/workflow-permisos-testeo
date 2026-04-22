@@ -24,7 +24,7 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Instalar jq
+      - name: Instalaciones
         run: sudo apt-get update && sudo apt-get install -y jq
 
       - name: Ejecutar script
